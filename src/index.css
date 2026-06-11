@@ -1,0 +1,469 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Noto Serif TC', Georgia, 'PingFang TC', serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* ---------- 背景 ---------- */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: background 1.2s ease;
+}
+
+.bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- HUD ---------- */
+
+.hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 26px;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.hud-sub {
+  margin-left: 10px;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  opacity: 0.4;
+  transition: all 0.25s ease;
+}
+
+.dot.on {
+  background: currentColor;
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.hearts {
+  font-size: 20px;
+}
+
+.heart-off {
+  opacity: 0.25;
+}
+
+.home-btn {
+  font-family: inherit;
+  font-size: 20px;
+  line-height: 1;
+  margin-right: 12px;
+  padding: 7px 12px;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.rush-timer {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- 卡片 ---------- */
+
+.card {
+  width: min(420px, 92vw);
+  padding: 44px 36px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 22px 60px rgba(20, 10, 50, 0.18);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.card.enter {
+  animation: cardIn 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.best {
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+}
+
+.hint {
+  font-size: 12.5px;
+  opacity: 0.6;
+}
+
+.gameover-stat {
+  font-size: 19px;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- 題目 ---------- */
+
+.question {
+  font-size: 76px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: 0 3px 18px rgba(30, 15, 60, 0.15);
+}
+
+/* ---------- 倒數圓環 ---------- */
+
+.ring-wrap {
+  position: relative;
+  width: 116px;
+  height: 116px;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.18;
+  stroke-width: 7;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.ring-num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 辨識文字 ---------- */
+
+.transcript {
+  min-height: 1.8em;
+  font-size: 17px;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 按鈕 ---------- */
+
+button.primary {
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  padding: 13px 36px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(40, 25, 80, 0.55);
+  backdrop-filter: blur(6px);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+button.primary:hover {
+  background: rgba(40, 25, 80, 0.75);
+  transform: translateY(-1px);
+}
+
+button.primary:active {
+  transform: scale(0.97);
+}
+
+button.ghost {
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  padding: 11px 30px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+button.ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- 模式選擇 ---------- */
+
+.mode-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.mode-list .primary {
+  width: 240px;
+}
+
+.mode-desc {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+button.rush-btn {
+  background: rgba(120, 35, 60, 0.55);
+}
+
+button.rush-btn:hover {
+  background: rgba(120, 35, 60, 0.75);
+}
+
+/* ---------- 返回首頁警示 ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 12, 40, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.card.confirm {
+  width: min(360px, 88vw);
+  padding: 34px 30px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.confirm-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.confirm-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+/* ---------- 排行榜 ---------- */
+
+.card.board {
+  width: min(520px, 92vw);
+}
+
+.board-cols {
+  display: flex;
+  gap: 28px;
+  width: 100%;
+  justify-content: center;
+}
+
+.board-col {
+  flex: 1;
+  max-width: 220px;
+}
+
+.board-col h3 {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.board-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.board-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.board-list li.me {
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.board-list.small {
+  max-width: 250px;
+}
+
+.board-rank {
+  width: 1.4em;
+  text-align: right;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.board-date {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.board-empty {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* ---------- 對錯回饋 ---------- */
+
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: pop 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.verdict-mark {
+  font-size: 58px;
+  line-height: 1;
+}
+
+.verdict.ok .verdict-mark {
+  color: #2f9e6e;
+}
+
+.verdict.no .verdict-mark {
+  color: #d35d6e;
+}
+
+.verdict-heard {
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.verdict-answer {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/* ---------- 升級 ---------- */
+
+.levelup-badge {
+  font-size: 46px;
+  animation: rise 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.levelup h2 {
+  font-size: 30px;
+  letter-spacing: 0.12em;
+}
