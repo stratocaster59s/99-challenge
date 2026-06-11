@@ -6,7 +6,6 @@ import { useSpeech, speechSupported } from './speech/useSpeech'
 import LevelBackground from './components/LevelBackground'
 import { initAudio, playCorrect, playWrong, playLevelUp } from './audio/sfx'
 import { loadBoard, recordScore, fmtDate, type Board } from './game/leaderboard'
-import { Zy, ZY } from './components/Zy'
 
 type Phase = 'idle' | 'show' | 'listen' | 'feedback' | 'levelup' | 'gameover'
 type Mode = 'classic' | 'rush'
@@ -346,34 +345,28 @@ export default function App() {
 
       {phase === 'idle' && (
         <div className="card enter">
-          <h1 className="title">
-            <Zy t={ZY.title} />
-          </h1>
-          <p className="subtitle">
-            <Zy t={ZY.subtitle} />
-          </p>
+          <h1 className="title">九九・聲之谷</h1>
+          <p className="subtitle">看題目,開口說答案。</p>
           <div className="mode-list">
             <button className="primary" onClick={() => startGame('classic')}>
-              <Zy t={ZY.classic} />
+              經典模式
             </button>
             <p className="mode-desc">
-              <Zy t={ZY.classicDesc} />
+              每答對十題登上一層新的山谷,時限越來越短
               {board.classic[0] && <> ・ 最高 {board.classic[0].score} 題</>}
             </p>
             <button className="primary rush-btn" onClick={() => startGame('rush')}>
-              <Zy t={ZY.rush} />
+              極限模式 ⏱ 60 秒
             </button>
             <p className="mode-desc">
-              <Zy t={ZY.rushDesc} />
+              一分鐘內盡量答,答對馬上換下一題,不扣命
               {board.rush[0] && <> ・ 最高 {board.rush[0].score} 題</>}
             </p>
           </div>
           <button className="ghost" onClick={() => setShowBoard(true)}>
-            🏆 <Zy t={ZY.board} />
+            🏆 排行榜
           </button>
-          <p className="hint">
-            <Zy t={ZY.hint} />
-          </p>
+          <p className="hint">按下後請允許使用麥克風</p>
         </div>
       )}
 
